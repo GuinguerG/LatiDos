@@ -6,8 +6,10 @@
     <title> LatiDos - Juntos desde el primer latido</title>
     <meta name="description" content=" Productos inteligentes para bebés. Todo lo que necesitas para cuidar a tu bebé con amor y tecnología.">
     
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
@@ -177,7 +179,7 @@
             width: 20px;
             height: 20px;
             font-size: 12px;
-            display: none; /* Oculto por defecto */
+            display: none;
             align-items: center;
             justify-content: center;
             font-weight: 600;
@@ -291,7 +293,7 @@
             flex-grow: 1; 
         }
         
-        .add-to-cart {
+        .product-action-btn {
             width: 100%;
             margin-top: auto;
         }
@@ -457,20 +459,22 @@
         .color-options {
             display: flex;
             gap: 12px;
+            margin-bottom: 25px;
         }
 
         .color-dot {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            border: 2px solid #eee;
+            border: 3px solid #eee;
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .color-dot:hover {
-            transform: scale(1.1);
+        .color-dot.selected {
+            border-color: var(--accent-alt);
+            transform: scale(1.15);
         }
         
         .close-modal {
@@ -490,6 +494,127 @@
             opacity: 1;
             transform: rotate(90deg);
         }
+
+        /* --- CART MODAL --- */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cart-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .cart-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-modal.show .cart-content {
+            transform: scale(1);
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .cart-item-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .cart-item-info .item-color {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-total {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .checkout-form {
+            display: none;
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border: 2px solid var(--light-gray); border-radius: 10px;
+            font-size: 16px; transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--accent);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
         /* --- FOOTER --- */
         .footer {
@@ -553,6 +678,27 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             opacity: 0.6;
         }
+
+        /* --- NOTIFICATION --- */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            background: var(--accent-alt);
+            color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 4000;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translate(-50%, -20px);
+        }
         
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
@@ -585,7 +731,7 @@
                 font-size: 2.5rem;
             }
             
-            .products-grid, .testimonials-grid, .footer-content {
+            .products-grid, .testimonials-grid, .footer-content, .form-row {
                 grid-template-columns: 1fr;
             }
 
@@ -601,6 +747,7 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#" class="logo">LatiDos</a>
@@ -617,6 +764,7 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="container">
             <div class="hero-content">
@@ -635,14 +783,17 @@
         </div>
     </section>
 
+    <!-- Products Section -->
     <section class="products" id="productos">
         <div class="container">
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="products-grid" id="products-container">
-                </div>
+                <!-- Productos se cargan aquí -->
+            </div>
         </div>
     </section>
 
+    <!-- Testimonials Section -->
     <section class="testimonials" id="testimonios">
         <div class="container">
             <h2 class="section-title">Lo que dicen nuestras madres</h2>
@@ -666,6 +817,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer" id="contacto">
         <div class="container">
             <div class="footer-content">
@@ -694,108 +846,79 @@
         </div>
     </footer>
 
+    <!-- Product Modal -->
     <div id="productModal" class="product-modal">
         <span class="close-modal">&times;</span>
         <div class="product-modal-content">
-            </div>
+            <!-- Contenido del modal se inyecta con JS -->
+        </div>
     </div>
 
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Mi Carrito</h3>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-total" id="cart-total" style="display: none;"></div>
+            <button class="btn btn-primary" id="checkout-btn" onclick="showCheckout()" style="width: 100%; display: none;">
+                Continuar con la compra
+            </button>
+            
+            <!-- Checkout Form -->
+            <div class="checkout-form" id="checkout-form">
+                <h4 style="margin-bottom: 20px;">Datos de envío</h4>
+                <form id="order-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>Nombre *</label><input type="text" name="firstName" required></div>
+                        <div class="form-group"><label>Apellido *</label><input type="text" name="lastName" required></div>
+                    </div>
+                    <div class="form-group"><label>Número de contacto *</label><input type="tel" name="phone" required></div>
+                    <div class="form-group"><label>Dirección completa *</label><textarea name="address" rows="3" required></textarea></div>
+                    <div class="form-group"><label>Ciudad *</label><input type="text" name="city" required></div>
+                    <div class="form-group"><label>Detalles adicionales</label><textarea name="comments" rows="2"></textarea></div>
+                    <div style="margin: 20px 0; padding: 15px; background: var(--light-gray); border-radius: 10px;">
+                        <h5>Resumen del pedido:</h5>
+                        <div id="order-summary"></div>
+                        <div style="border-top: 2px solid var(--accent); padding-top: 10px; margin-top: 10px;">
+                            <strong>Total + Envío: <span id="final-total">$0</span></strong>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Confirmar Pedido por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
     <script>
+        // Variable global para almacenar el color seleccionado en el modal
+        let selectedColor = null;
+
         document.addEventListener('DOMContentLoaded', function() {
             
             const WHATSAPP_NUMBER = '573017615578';
             let products = [];
+            let cart = [];
+            let shippingCost = 12000; // Costo de envío
 
             /**
              * Contiene los datos de los productos.
-             * NOTA: Las imágenes de la galería son placeholders, debes reemplazarlas por las correctas.
              */
             function getDemoProducts() {
                 return [
-                    {
-                        id: 1,
-                        name: 'Cojín Anticaídas',
-                        price: 180000,
-                        description: 'Cojín protector con diseño de abeja para acompañar a tu bebé en sus primeros pasos.',
-                        fullDescription: 'Este cojín está diseñado ergonómicamente para proteger la cabeza y espalda de tu bebé ante posibles caídas mientras aprende a sentarse y caminar. Fabricado con materiales suaves y transpirables para el máximo confort.',
-                        image: 'Imagenes/Producto 1 - Cojin anticaidas.png',
-                        gallery: [
-                            'Imagenes/Producto 1 - Cojin anticaidas.png',
-                            'Imagenes/Producto 1 - Cojin anticaidas.png', // Reemplazar
-                            'Imagenes/Producto 1 - Cojin anticaidas.png'  // Reemplazar
-                        ],
-                        colors: ['#FFD700', '#FFC0CB', '#87CEEB']
-                    },
-                    {
-                        id: 2,
-                        name: 'Peluche Calmante Abrazador',
-                        price: 89000,
-                        description: 'Las palmaditas suaves y rítmicas ayudan a calmar a tu bebé y a promover el sueño.',
-                        fullDescription: 'Este adorable peluche emite vibraciones suaves y un latido rítmico que simula la calma del vientre materno, ayudando a tu bebé a relajarse y dormir profundamente. Incluye un control remoto para fácil manejo.',
-                        image: 'Imagenes/Producto 2 - Cojin abrazador.png',
-                        gallery: [
-                            'Imagenes/Producto 2 - Cojin abrazador.png',
-                            'Imagenes/Producto 2 - Cojin abrazador.png', // Reemplazar
-                            'Imagenes/Producto 2 - Cojin abrazador.png'  // Reemplazar
-                        ],
-                        colors: ['#FFFFFF', '#F5F5DC']
-                    },
-                    {
-                        id: 3,
-                        name: 'Cojín Anti-plagiocefalia',
-                        price: 120000,
-                        description: 'Cojín para prevenir y corregir la cabecita plana o plagiocefalia.',
-                        fullDescription: 'Diseñado por pediatras, este cojín distribuye uniformemente la presión sobre el cráneo del bebé, ayudando a prevenir el síndrome de cabeza plana. Su espuma viscoelástica es cómoda y segura.',
-                        image: 'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg',
-                        gallery: [
-                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg',
-                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg', // Reemplazar
-                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg'  // Reemplazar
-                        ],
-                        colors: ['#ADD8E6', '#90EE90']
-                    },
-                    {
-                        id: 4,
-                        name: 'Calienta Biberones Smart',
-                        price: 95000,
-                        description: 'Calienta biberones a la temperatura perfecta, ideal para cuando sales con tu bebé.',
-                        fullDescription: 'Este calentador de biberones portátil y recargable por USB es el compañero de viaje perfecto. Mantiene la leche a la temperatura ideal de forma constante. Compatible con la mayoría de los biberones.',
-                        image: 'Imagenes/Producto 4 - Calienta biberones.png',
-                        gallery: [
-                            'Imagenes/Producto 4 - Calienta biberones.png',
-                            'Imagenes/Producto 4 - Calienta biberones.png', // Reemplazar
-                            'Imagenes/Producto 4 - Calienta biberones.png'  // Reemplazar
-                        ],
-                        colors: ['#FF69B4', '#6495ED']
-                    },
-                    {
-                        id: 5,
-                        name: 'Tina Plegable con Termómetro',
-                        price: 450000,
-                        description: 'Bañera plegable, cómoda para guardar fácilmente en cualquier lugar.',
-                        fullDescription: 'Ahorra espacio con esta innovadora tina plegable. Incluye un cojín de apoyo para recién nacidos y un termómetro digital integrado para asegurar siempre la temperatura perfecta del agua. Patas antideslizantes para mayor seguridad.',
-                        image: 'Imagenes/Producto 5 - Tina Plegable.jpg',
-                        gallery: [
-                            'Imagenes/Producto 5 - Tina Plegable.jpg',
-                            'Imagenes/Producto 5 - Tina Plegable.jpg', // Reemplazar
-                            'Imagenes/Producto 5 - Tina Plegable.jpg'  // Reemplazar
-                        ],
-                        colors: ['#808080', '#008080']
-                    },
-                     {
-                        id: 6,
-                        name: 'Aspirador Nasal Eléctrico',
-                        price: 75000,
-                        description: 'Ayuda a descongestionar a tu bebé de forma suave y eficaz.',
-                        fullDescription: 'Este aspirador nasal eléctrico es silencioso y potente, ideal para limpiar las fosas nasales de tu bebé sin causarle molestias. Incluye varias boquillas de silicona de grado médico, fáciles de limpiar.',
-                        image: 'Imagenes/Producto 6 - Aspirador nasal.png',
-                        gallery: [
-                            'Imagenes/Producto 6 - Aspirador nasal.png',
-                            'Imagenes/Producto 6 - Aspirador nasal.png', // Reemplazar
-                            'Imagenes/Producto 6 - Aspirador nasal.png'  // Reemplazar
-                        ],
-                        colors: ['#AFEEEE', '#E0FFFF']
-                    }
+                    { id: 1, name: 'Cojín Anticaídas', price: 180000, description: 'Cojín protector con diseño de abeja para acompañar a tu bebé en sus primeros pasos.', fullDescription: 'Este cojín está diseñado ergonómicamente para proteger la cabeza y espalda de tu bebé ante posibles caídas. Fabricado con materiales suaves y transpirables.', image: 'Imagenes/Producto 1 - Cojin anticaidas.png', gallery: ['Imagenes/Producto 1 - Cojin anticaidas.png','Imagenes/Producto 1 - Cojin anticaidas.png','Imagenes/Producto 1 - Cojin anticaidas.png'], colors: ['#FFD700', '#FFC0CB', '#87CEEB'], colorNames: ['Amarillo', 'Rosa', 'Azul'] },
+                    { id: 2, name: 'Peluche Calmante Abrazador', price: 89000, description: 'Las palmaditas suaves y rítmicas ayudan a calmar a tu bebé y a promover el sueño.', fullDescription: 'Este adorable peluche emite vibraciones suaves y un latido rítmico que simula la calma del vientre materno, ayudando a tu bebé a relajarse y dormir profundamente.', image: 'Imagenes/Producto 2 - Cojin abrazador.png', gallery: ['Imagenes/Producto 2 - Cojin abrazador.png','Imagenes/Producto 2 - Cojin abrazador.png','Imagenes/Producto 2 - Cojin abrazador.png'], colors: ['#FFFFFF', '#F5F5DC'], colorNames: ['Blanco', 'Beige'] },
+                    { id: 3, name: 'Cojín Anti-plagiocefalia', price: 120000, description: 'Cojín para prevenir y corregir la cabecita plana o plagiocefalia.', fullDescription: 'Diseñado por pediatras, este cojín distribuye uniformemente la presión sobre el cráneo del bebé, ayudando a prevenir el síndrome de cabeza plana.', image: 'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg', gallery: ['Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg','Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg','Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg'], colors: ['#ADD8E6', '#90EE90'], colorNames: ['Azul Claro', 'Verde Claro'] },
+                    { id: 4, name: 'Calienta Biberones Smart', price: 95000, description: 'Calienta biberones a la temperatura perfecta, ideal para cuando sales con tu bebé.', fullDescription: 'Este calentador de biberones portátil y recargable por USB es el compañero de viaje perfecto. Mantiene la leche a la temperatura ideal de forma constante.', image: 'Imagenes/Producto 4 - Calienta biberones.png', gallery: ['Imagenes/Producto 4 - Calienta biberones.png','Imagenes/Producto 4 - Calienta biberones.png','Imagenes/Producto 4 - Calienta biberones.png'], colors: ['#FF69B4', '#6495ED'], colorNames: ['Rosa', 'Azul'] },
+                    { id: 5, name: 'Tina Plegable con Termómetro', price: 450000, description: 'Bañera plegable, cómoda para guardar fácilmente en cualquier lugar.', fullDescription: 'Ahorra espacio con esta innovadora tina plegable. Incluye un cojín de apoyo para recién nacidos y un termómetro digital integrado para asegurar siempre la temperatura perfecta del agua.', image: 'Imagenes/Producto 5 - Tina Plegable.jpg', gallery: ['Imagenes/Producto 5 - Tina Plegable.jpg','Imagenes/Producto 5 - Tina Plegable.jpg','Imagenes/Producto 5 - Tina Plegable.jpg'], colors: ['#808080', '#008080'], colorNames: ['Gris', 'Verde Azulado'] },
+                    { id: 6, name: 'Aspirador Nasal Eléctrico', price: 75000, description: 'Ayuda a descongestionar a tu bebé de forma suave y eficaz.', fullDescription: 'Este aspirador nasal eléctrico es silencioso y potente, ideal para limpiar las fosas nasales de tu bebé sin causarle molestias.', image: 'Imagenes/Producto 6 - Aspirador nasal.png', gallery: ['Imagenes/Producto 6 - Aspirador nasal.png','Imagenes/Producto 6 - Aspirador nasal.png','Imagenes/Producto 6 - Aspirador nasal.png'], colors: ['#AFEEEE', '#E0FFFF'], colorNames: ['Turquesa', 'Cian Claro'] }
                 ];
             }
 
@@ -805,12 +928,6 @@
             function displayProducts() {
                 const container = document.getElementById('products-container');
                 products = getDemoProducts();
-                
-                if (!products.length) {
-                    container.innerHTML = '<p>No hay productos disponibles.</p>';
-                    return;
-                }
-
                 container.innerHTML = products.map(product => `
                     <div class="product-card">
                         <div class="product-image-container" onclick="openProductModal(${product.id})">
@@ -819,8 +936,8 @@
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-price">${formatPrice(product.price)}</p>
                         <p class="product-description">${product.description}</p>
-                        <button class="btn btn-primary add-to-cart">
-                            Agregar al carrito
+                        <button class="btn btn-primary product-action-btn" onclick="openProductModal(${product.id})">
+                            Ver Detalles
                         </button>
                     </div>
                 `).join('');
@@ -831,95 +948,229 @@
             const modalContent = modal.querySelector('.product-modal-content');
             const closeModalBtn = modal.querySelector('.close-modal');
 
-            /**
-             * Abre el modal con la información del producto seleccionado.
-             * @param {number} productId - El ID del producto.
-             */
             window.openProductModal = (productId) => {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
+                selectedColor = product.colorNames[0]; // Selecciona el primer color por defecto
 
                 modalContent.innerHTML = `
                     <div class="modal-gallery">
-                        <div class="modal-main-image">
-                            <img src="${product.gallery[0]}" alt="${product.name}" id="mainModalImage">
-                        </div>
+                        <div class="modal-main-image"><img src="${product.gallery[0]}" alt="${product.name}" id="mainModalImage"></div>
                         <div class="modal-thumbnails">
-                            ${product.gallery.map((img, index) => `
-                                <div class="modal-thumb ${index === 0 ? 'active' : ''}" onclick="changeModalImage('${img}', this)">
-                                    <img src="${img}" alt="Vista ${index + 1}">
-                                </div>
-                            `).join('')}
+                            ${product.gallery.map((img, index) => `<div class="modal-thumb ${index === 0 ? 'active' : ''}" onclick="changeModalImage('${img}', this)"><img src="${img}" alt="Vista ${index + 1}"></div>`).join('')}
                         </div>
                     </div>
                     <div class="modal-details">
                         <h2>${product.name}</h2>
                         <p class="modal-price">${formatPrice(product.price)}</p>
-                        <div class="modal-full-description">
-                            <p>${product.fullDescription}</p>
-                        </div>
+                        <div class="modal-full-description"><p>${product.fullDescription}</p></div>
                         <div class="modal-colors">
                             <h4>Colores disponibles:</h4>
                             <div class="color-options">
-                                ${product.colors.map(color => `<div class="color-dot" style="background-color:${color};" title="${color}"></div>`).join('')}
+                                ${product.colors.map((color, index) => `<div class="color-dot ${index === 0 ? 'selected' : ''}" style="background-color:${color};" title="${product.colorNames[index]}" onclick="selectColor(this, '${product.colorNames[index]}')"></div>`).join('')}
                             </div>
                         </div>
+                        <button class="btn btn-primary" onclick="addToCartFromModal(${product.id})">Agregar al Carrito</button>
                     </div>
                 `;
                 modal.classList.add('show');
             }
 
-            /**
-             * Cambia la imagen principal en el modal.
-             * @param {string} newImageSrc - La URL de la nueva imagen.
-             * @param {HTMLElement} thumbElement - El elemento de la miniatura clicada.
-             */
+            window.selectColor = (element, colorName) => {
+                selectedColor = colorName;
+                document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('selected'));
+                element.classList.add('selected');
+            }
+
             window.changeModalImage = (newImageSrc, thumbElement) => {
                 document.getElementById('mainModalImage').src = newImageSrc;
                 document.querySelectorAll('.modal-thumb').forEach(thumb => thumb.classList.remove('active'));
                 thumbElement.classList.add('active');
             }
 
-            // Cierra el modal al hacer clic en la 'X' o fuera del contenido.
             closeModalBtn.addEventListener('click', () => modal.classList.remove('show'));
-            modal.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.classList.remove('show');
-                }
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) modal.classList.remove('show');
             });
 
+            // --- LÓGICA DEL CARRITO ---
+            window.addToCartFromModal = (productId) => {
+                addToCart(productId, selectedColor);
+            }
+
+            window.addToCart = (productId, color = null) => {
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+
+                const chosenColor = color || product.colorNames[0];
+                const cartItemId = `${productId}-${chosenColor}`;
+
+                const existingItem = cart.find(item => item.cartId === cartItemId);
+                
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1, color: chosenColor, cartId: cartItemId });
+                }
+                
+                showNotification(`'${product.name}' (${chosenColor}) fue agregado al carrito.`);
+                updateCart();
+                if(modal.classList.contains('show')) modal.classList.remove('show');
+            }
+
+            window.updateQuantity = (cartId, change) => {
+                const item = cart.find(item => item.cartId === cartId);
+                if (!item) return;
+
+                const newQuantity = item.quantity + change;
+                if (newQuantity <= 0) {
+                    cart = cart.filter(item => item.cartId !== cartId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+                updateCart();
+            }
+
+            function updateCart() {
+                updateCartCount();
+                updateCartDisplay();
+            }
+
+            function updateCartCount() {
+                const cartCount = document.querySelector('.cart-count');
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+
+            function updateCartDisplay() {
+                const cartItemsEl = document.getElementById('cart-items');
+                const cartTotalEl = document.getElementById('cart-total');
+                const checkoutBtn = document.getElementById('checkout-btn');
+                
+                if (cart.length === 0) {
+                    cartItemsEl.innerHTML = `<p style="text-align: center; color: var(--gray); padding: 50px 0;">Tu carrito está vacío</p>`;
+                    cartTotalEl.style.display = 'none';
+                    checkoutBtn.style.display = 'none';
+                    document.getElementById('checkout-form').style.display = 'none';
+                    return;
+                }
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                cartItemsEl.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="item-color">Color: ${item.color}</div>
+                            <div class="cart-item-price">${formatPrice(item.price)} x ${item.quantity}</div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', 1)">+</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                cartTotalEl.innerHTML = `Total: ${formatPrice(total)}`;
+                cartTotalEl.style.display = 'block';
+                checkoutBtn.style.display = 'block';
+            }
+
+            window.toggleCart = () => document.getElementById('cart-modal').classList.toggle('show');
+            
+            window.showCheckout = () => {
+                document.getElementById('checkout-form').style.display = 'block';
+                updateOrderSummary();
+            }
+
+            function updateOrderSummary() {
+                const orderSummaryEl = document.getElementById('order-summary');
+                const finalTotalEl = document.getElementById('final-total');
+                
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const total = subtotal + shippingCost;
+                
+                orderSummaryEl.innerHTML = cart.map(item => `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>${item.name} (${item.color}) x${item.quantity}</span>
+                        <span>${formatPrice(item.price * item.quantity)}</span>
+                    </div>`).join('') +
+                    `<div style="display: flex; justify-content: space-between; border-top: 1px solid var(--gray); padding-top: 10px; margin-top: 10px;">
+                        <span>Envío:</span>
+                        <span>${formatPrice(shippingCost)}</span>
+                    </div>`;
+                
+                finalTotalEl.textContent = formatPrice(total);
+            }
+
+            document.getElementById('order-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const orderData = Object.fromEntries(formData.entries());
+                
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const total = subtotal + shippingCost;
+                
+                const message = `🛍️ *NUEVO PEDIDO - LATIDOS*
+
+👤 *Datos del cliente:*
+• Nombre: ${orderData.firstName} ${orderData.lastName}
+• Teléfono: ${orderData.phone}
+• Dirección: ${orderData.address}, ${orderData.city}
+
+🛒 *Productos:*
+${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.quantity} - ${formatPrice(item.price * item.quantity)}`).join('\n')}
+
+💰 *Resumen de pago:*
+• Subtotal: ${formatPrice(subtotal)}
+• Envío: ${formatPrice(shippingCost)}
+• *Total a pagar: ${formatPrice(total)}* (Pago contraentrega)
+
+📝 *Comentarios:* ${orderData.comments || 'Ninguno'}`;
+                
+                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message.trim())}`;
+                window.open(whatsappUrl, '_blank');
+                
+                cart = [];
+                updateCart();
+                toggleCart();
+                showNotification('¡Pedido enviado! Serás redirigido a WhatsApp.');
+                event.target.reset();
+            });
+
+            /**
+             * Muestra una notificación temporal.
+             */
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 3000);
+            }
 
             /**
              * Da formato de moneda colombiana a un número.
-             * @param {number} price - El precio a formatear.
              */
             function formatPrice(price) {
-                return new Intl.NumberFormat('es-CO', {
-                    style: 'currency',
-                    currency: 'COP',
-                    minimumFractionDigits: 0
-                }).format(price);
+                return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(price);
             }
 
             // --- INICIALIZACIÓN ---
             function init() {
-                // Configurar botón de WhatsApp
                 const contactBtn = document.getElementById('contact-btn');
                 const message = encodeURIComponent("¡Hola LatiDos! 💕 me gustaría recibir información de un producto.");
                 contactBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
-                // Cargar productos en la página
                 displayProducts();
 
-                // Efecto de sombra en el header al hacer scroll
-                window.addEventListener('scroll', function() {
-                    const header = document.getElementById('header');
-                    header.classList.toggle('scrolled', window.scrollY > 50);
+                window.addEventListener('scroll', () => {
+                    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
                 });
             }
 
             init();
-
         });
     </script>
 </body>

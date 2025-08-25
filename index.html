@@ -288,15 +288,57 @@
             color: var(--gray);
             margin-bottom: 20px;
             line-height: 1.5;
-            flex-grow: 1; /* Empuja el botón hacia abajo */
+            flex-grow: 1; 
         }
         
         .add-to-cart {
             width: 100%;
-            margin-top: auto; /* Se alinea al final */
+            margin-top: auto;
+        }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials {
+            padding: 80px 0;
         }
         
-        /* --- MODAL DE PRODUCTO --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: var(--dark);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-alt);
+        }
+        
+        .stars {
+            color: var(--support);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* --- MODAL DE PRODUCTO (ZOOM) --- */
         .product-modal {
             display: none;
             position: fixed;
@@ -306,7 +348,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.8);
             align-items: center;
             justify-content: center;
             opacity: 0;
@@ -323,11 +365,11 @@
             margin: auto;
             padding: 30px;
             border-radius: 20px;
-            width: 90%;
-            max-width: 800px;
+            width: 95%;
+            max-width: 1000px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
             transform: scale(0.9);
             transition: transform 0.3s ease;
         }
@@ -339,35 +381,35 @@
         .modal-gallery {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
 
         .modal-main-image {
             width: 100%;
-            height: 300px;
             border-radius: 15px;
             overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
         .modal-main-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
         }
 
         .modal-thumbnails {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
 
         .modal-thumb {
-            width: 100%;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
             transition: border-color 0.3s;
         }
 
@@ -382,56 +424,72 @@
             object-fit: cover;
         }
 
+        .modal-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .modal-details h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .modal-price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .modal-full-description {
             color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            line-height: 1.7;
         }
 
-        .modal-colors h4,
-        .modal-stock h4 {
-             margin-bottom: 10px;
+        .modal-colors h4 {
+             margin-bottom: 12px;
+             font-weight: 600;
         }
 
         .color-options {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .color-dot {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: 2px solid #eee;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.1);
         }
         
         .close-modal {
             position: absolute;
             top: 15px;
             right: 25px;
-            color: #aaa;
-            font-size: 32px;
+            color: #fff;
+            font-size: 40px;
             font-weight: bold;
             cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 2001;
         }
 
-        .close-modal:hover,
-        .close-modal:focus {
-            color: var(--dark);
+        .close-modal:hover {
+            opacity: 1;
+            transform: rotate(90deg);
         }
-
 
         /* --- FOOTER --- */
         .footer {
@@ -501,11 +559,16 @@
             .hero-text h1 {
                 font-size: 2.8rem;
             }
+            .product-modal-content {
+                grid-template-columns: 1fr;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
         }
         
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Se puede implementar un menú hamburguesa aquí */
+                display: none;
             }
             
             .hero-content {
@@ -515,27 +578,29 @@
             }
 
             .hero-image {
-                order: -1; /* Mueve la imagen arriba en móvil */
+                order: -1;
             }
             
             .hero-text h1 {
                 font-size: 2.5rem;
             }
-
-            .product-modal-content {
-                grid-template-columns: 1fr;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
             
             .products-grid, .testimonials-grid, .footer-content {
                 grid-template-columns: 1fr;
+            }
+
+            .close-modal {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                color: var(--dark);
             }
         }
 
     </style>
 </head>
 <body>
+
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#" class="logo">LatiDos</a>
@@ -578,7 +643,7 @@
         </div>
     </section>
 
-     <section class="testimonials" id="testimonios">
+    <section class="testimonials" id="testimonios">
         <div class="container">
             <h2 class="section-title">Lo que dicen nuestras madres</h2>
             <div class="testimonials-grid">
@@ -630,10 +695,10 @@
     </footer>
 
     <div id="productModal" class="product-modal">
+        <span class="close-modal">&times;</span>
         <div class="product-modal-content">
             </div>
     </div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -641,23 +706,25 @@
             const WHATSAPP_NUMBER = '573017615578';
             let products = [];
 
-            // --- FUNCIÓN PARA OBTENER PRODUCTOS (DEMO) --- //
+            /**
+             * Contiene los datos de los productos.
+             * NOTA: Las imágenes de la galería son placeholders, debes reemplazarlas por las correctas.
+             */
             function getDemoProducts() {
                 return [
                     {
                         id: 1,
                         name: 'Cojín Anticaídas',
                         price: 180000,
-                        description: 'Cojín protector con diseño de abeja para acompañar a tu bebé en sus primeros pasos, brindando seguridad y confort.',
-                        fullDescription: 'Este cojín está diseñado ergonómicamente para proteger la cabeza y espalda de tu bebé ante posibles caídas mientras aprende a sentarse y caminar. Fabricado con materiales suaves y transpirables.',
+                        description: 'Cojín protector con diseño de abeja para acompañar a tu bebé en sus primeros pasos.',
+                        fullDescription: 'Este cojín está diseñado ergonómicamente para proteger la cabeza y espalda de tu bebé ante posibles caídas mientras aprende a sentarse y caminar. Fabricado con materiales suaves y transpirables para el máximo confort.',
                         image: 'Imagenes/Producto 1 - Cojin anticaidas.png',
                         gallery: [
                             'Imagenes/Producto 1 - Cojin anticaidas.png',
-                            'Imagenes/Producto 1 - Cojin anticaidas.png', // Placeholder
-                            'Imagenes/Producto 1 - Cojin anticaidas.png'  // Placeholder
+                            'Imagenes/Producto 1 - Cojin anticaidas.png', // Reemplazar
+                            'Imagenes/Producto 1 - Cojin anticaidas.png'  // Reemplazar
                         ],
-                        colors: ['#FFD700', '#FFC0CB', '#87CEEB'], // Amarillo, Rosa, Azul
-                        stock: 15
+                        colors: ['#FFD700', '#FFC0CB', '#87CEEB']
                     },
                     {
                         id: 2,
@@ -668,11 +735,10 @@
                         image: 'Imagenes/Producto 2 - Cojin abrazador.png',
                         gallery: [
                             'Imagenes/Producto 2 - Cojin abrazador.png',
-                            'Imagenes/Producto 2 - Cojin abrazador.png', // Placeholder
-                            'Imagenes/Producto 2 - Cojin abrazador.png'  // Placeholder
+                            'Imagenes/Producto 2 - Cojin abrazador.png', // Reemplazar
+                            'Imagenes/Producto 2 - Cojin abrazador.png'  // Reemplazar
                         ],
-                        colors: ['#FFFFFF', '#F5F5DC'], // Blanco, Beige
-                        stock: 25
+                        colors: ['#FFFFFF', '#F5F5DC']
                     },
                     {
                         id: 3,
@@ -683,11 +749,10 @@
                         image: 'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg',
                         gallery: [
                             'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg',
-                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg', // Placeholder
-                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg'  // Placeholder
+                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg', // Reemplazar
+                            'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg'  // Reemplazar
                         ],
-                        colors: ['#ADD8E6', '#90EE90'], // Azul claro, Verde claro
-                        stock: 10
+                        colors: ['#ADD8E6', '#90EE90']
                     },
                     {
                         id: 4,
@@ -698,11 +763,10 @@
                         image: 'Imagenes/Producto 4 - Calienta biberones.png',
                         gallery: [
                             'Imagenes/Producto 4 - Calienta biberones.png',
-                            'Imagenes/Producto 4 - Calienta biberones.png', // Placeholder
-                            'Imagenes/Producto 4 - Calienta biberones.png'  // Placeholder
+                            'Imagenes/Producto 4 - Calienta biberones.png', // Reemplazar
+                            'Imagenes/Producto 4 - Calienta biberones.png'  // Reemplazar
                         ],
-                        colors: ['#FF69B4', '#6495ED'], // Rosa, Azul
-                        stock: 20
+                        colors: ['#FF69B4', '#6495ED']
                     },
                     {
                         id: 5,
@@ -713,11 +777,10 @@
                         image: 'Imagenes/Producto 5 - Tina Plegable.jpg',
                         gallery: [
                             'Imagenes/Producto 5 - Tina Plegable.jpg',
-                            'Imagenes/Producto 5 - Tina Plegable.jpg', // Placeholder
-                            'Imagenes/Producto 5 - Tina Plegable.jpg'  // Placeholder
+                            'Imagenes/Producto 5 - Tina Plegable.jpg', // Reemplazar
+                            'Imagenes/Producto 5 - Tina Plegable.jpg'  // Reemplazar
                         ],
-                        colors: ['#808080', '#008080'], // Gris, Teal
-                        stock: 5
+                        colors: ['#808080', '#008080']
                     },
                      {
                         id: 6,
@@ -728,22 +791,23 @@
                         image: 'Imagenes/Producto 6 - Aspirador nasal.png',
                         gallery: [
                             'Imagenes/Producto 6 - Aspirador nasal.png',
-                            'Imagenes/Producto 6 - Aspirador nasal.png', // Placeholder
-                            'Imagenes/Producto 6 - Aspirador nasal.png'  // Placeholder
+                            'Imagenes/Producto 6 - Aspirador nasal.png', // Reemplazar
+                            'Imagenes/Producto 6 - Aspirador nasal.png'  // Reemplazar
                         ],
-                        colors: ['#AFEEEE', '#E0FFFF'], // Turquesa pálido, Cian claro
-                        stock: 18
+                        colors: ['#AFEEEE', '#E0FFFF']
                     }
                 ];
             }
 
-            // --- LÓGICA DE VISUALIZACIÓN DE PRODUCTOS --- //
+            /**
+             * Muestra los productos en la página principal.
+             */
             function displayProducts() {
                 const container = document.getElementById('products-container');
-                products = getDemoProducts(); // Cargamos los productos
+                products = getDemoProducts();
                 
                 if (!products.length) {
-                    container.innerHTML = '<p>No hay productos disponibles en este momento.</p>';
+                    container.innerHTML = '<p>No hay productos disponibles.</p>';
                     return;
                 }
 
@@ -762,16 +826,20 @@
                 `).join('');
             }
             
-            // --- LÓGICA DEL MODAL DE PRODUCTO --- //
+            // --- LÓGICA DEL MODAL DE PRODUCTO ---
             const modal = document.getElementById('productModal');
             const modalContent = modal.querySelector('.product-modal-content');
+            const closeModalBtn = modal.querySelector('.close-modal');
 
+            /**
+             * Abre el modal con la información del producto seleccionado.
+             * @param {number} productId - El ID del producto.
+             */
             window.openProductModal = (productId) => {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
 
                 modalContent.innerHTML = `
-                    <span class="close-modal">&times;</span>
                     <div class="modal-gallery">
                         <div class="modal-main-image">
                             <img src="${product.gallery[0]}" alt="${product.name}" id="mainModalImage">
@@ -793,33 +861,38 @@
                         <div class="modal-colors">
                             <h4>Colores disponibles:</h4>
                             <div class="color-options">
-                                ${product.colors.map(color => `<div class="color-dot" style="background-color:${color};"></div>`).join('')}
+                                ${product.colors.map(color => `<div class="color-dot" style="background-color:${color};" title="${color}"></div>`).join('')}
                             </div>
-                        </div>
-                         <div class="modal-stock" style="margin-top: 20px;">
-                            <h4>Stock: ${product.stock > 0 ? `${product.stock} unidades` : 'Agotado'}</h4>
                         </div>
                     </div>
                 `;
                 modal.classList.add('show');
             }
 
+            /**
+             * Cambia la imagen principal en el modal.
+             * @param {string} newImageSrc - La URL de la nueva imagen.
+             * @param {HTMLElement} thumbElement - El elemento de la miniatura clicada.
+             */
             window.changeModalImage = (newImageSrc, thumbElement) => {
                 document.getElementById('mainModalImage').src = newImageSrc;
-                // Actualizar la clase activa
                 document.querySelectorAll('.modal-thumb').forEach(thumb => thumb.classList.remove('active'));
                 thumbElement.classList.add('active');
             }
 
-            // Cerrar el modal
+            // Cierra el modal al hacer clic en la 'X' o fuera del contenido.
+            closeModalBtn.addEventListener('click', () => modal.classList.remove('show'));
             modal.addEventListener('click', function(event) {
-                if (event.target === modal || event.target.classList.contains('close-modal')) {
+                if (event.target === modal) {
                     modal.classList.remove('show');
                 }
             });
 
 
-            // --- UTILIDADES --- //
+            /**
+             * Da formato de moneda colombiana a un número.
+             * @param {number} price - El precio a formatear.
+             */
             function formatPrice(price) {
                 return new Intl.NumberFormat('es-CO', {
                     style: 'currency',
@@ -828,24 +901,24 @@
                 }).format(price);
             }
 
-            // --- INICIALIZACIÓN --- //
-            // 1. Configurar botón de WhatsApp
-            const contactBtn = document.getElementById('contact-btn');
-            const message = encodeURIComponent("¡Hola LatiDos! 💕 me gustaría recibir información de un producto.");
-            contactBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            // --- INICIALIZACIÓN ---
+            function init() {
+                // Configurar botón de WhatsApp
+                const contactBtn = document.getElementById('contact-btn');
+                const message = encodeURIComponent("¡Hola LatiDos! 💕 me gustaría recibir información de un producto.");
+                contactBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
-            // 2. Cargar productos
-            displayProducts();
+                // Cargar productos en la página
+                displayProducts();
 
-            // 3. Efecto de sombra en el header al hacer scroll
-            window.addEventListener('scroll', function() {
-                const header = document.getElementById('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
+                // Efecto de sombra en el header al hacer scroll
+                window.addEventListener('scroll', function() {
+                    const header = document.getElementById('header');
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                });
+            }
+
+            init();
 
         });
     </script>

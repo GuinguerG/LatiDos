@@ -185,43 +185,61 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 140px 0 80px;
+            padding-top: 100px; /* Espacio para el header fijo */
+            position: relative;
+            height: 85vh; /* Altura ajustada */
+            display: flex;
+            align-items: center; /* Centra el contenido verticalmente */
+            justify-content: center; /* Centra el contenido horizontalmente */
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px; /* Altura del difuminado */
+            background: linear-gradient(to top, var(--light-gray), transparent);
+            z-index: 2;
         }
         
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
-        
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubre todo el espacio sin deformar */
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para legibilidad */
+            padding: 40px;
+            border-radius: 20px;
+        }
+
         .hero-text h1 {
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
-            color: var(--dark);
         }
         
         .hero-text p {
             font-size: 1.2rem;
             margin-bottom: 30px;
-            color: var(--dark);
-            opacity: 0.8;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-            animation: bounce 3s infinite ease-in-out;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            opacity: 0.9;
         }
         
         /* --- PRODUCTS SECTION --- */
@@ -732,16 +750,10 @@
                 display: none;
             }
             
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
+            .hero-text {
+                padding: 30px;
             }
 
-            .hero-image {
-                order: -1;
-            }
-            
             .hero-text h1 {
                 font-size: 2.5rem;
             }
@@ -780,6 +792,10 @@
         }
 
         @media (max-width: 480px) {
+            .hero-text {
+                padding: 20px;
+            }
+
             .hero-text h1 {
                 font-size: 2rem;
             }
@@ -832,19 +848,17 @@
     </header>
 
     <section class="hero" id="inicio">
+        <div class="hero-image">
+            <img src="Imagenes/Imagen Hero.jpg" alt="Madre y bebé jugando">
+        </div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Juntos desde el primer latido</h1>
-                    <p>Descubre productos inteligentes diseñados especialmente para cuidar a tu bebé con amor y tecnología de vanguardia.</p>
-                    <a href="#productos" class="btn btn-primary">Ver Productos</a>
-                    <a id="contact-btn" href="#" class="btn btn-secondary" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Contáctanos
-                    </a>
-                </div>
-                <div class="hero-image">
-                    <img src="Imagenes/Imagen Hero.jpg" alt="Madre y bebé jugando">
-                </div>
+            <div class="hero-text">
+                <h1>Juntos desde el primer latido</h1>
+                <p>Descubre productos inteligentes diseñados especialmente para cuidar a tu bebé con amor y tecnología de vanguardia.</p>
+                <a href="#productos" class="btn btn-primary">Ver Productos</a>
+                <a id="contact-btn" href="#" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contáctanos
+                </a>
             </div>
         </div>
     </section>

@@ -6,10 +6,8 @@
     <title> LatiDos - Juntos desde el primer latido</title>
     <meta name="description" content=" Productos inteligentes para bebés. Todo lo que necesitas para cuidar a tu bebé con amor y tecnología.">
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
@@ -747,7 +745,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#" class="logo">LatiDos</a>
@@ -764,7 +761,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="container">
             <div class="hero-content">
@@ -783,17 +779,14 @@
         </div>
     </section>
 
-    <!-- Products Section -->
     <section class="products" id="productos">
         <div class="container">
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="products-grid" id="products-container">
-                <!-- Productos se cargan aquí -->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="testimonials" id="testimonios">
         <div class="container">
             <h2 class="section-title">Lo que dicen nuestras madres</h2>
@@ -817,7 +810,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer" id="contacto">
         <div class="container">
             <div class="footer-content">
@@ -846,15 +838,12 @@
         </div>
     </footer>
 
-    <!-- Product Modal -->
     <div id="productModal" class="product-modal">
         <span class="close-modal">&times;</span>
         <div class="product-modal-content">
-            <!-- Contenido del modal se inyecta con JS -->
-        </div>
+            </div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="cart-modal" id="cart-modal">
         <div class="cart-content">
             <div class="cart-header">
@@ -867,7 +856,6 @@
                 Continuar con la compra
             </button>
             
-            <!-- Checkout Form -->
             <div class="checkout-form" id="checkout-form">
                 <h4 style="margin-bottom: 20px;">Datos de envío</h4>
                 <form id="order-form">
@@ -894,7 +882,6 @@
         </div>
     </div>
 
-    <!-- Notification -->
     <div class="notification" id="notification"></div>
 
     <script>
@@ -913,12 +900,50 @@
              */
             function getDemoProducts() {
                 return [
-                    { id: 1, name: 'Cojín Anticaídas', price: 180000, description: 'Cojín protector con diseño de abeja para acompañar a tu bebé en sus primeros pasos.', fullDescription: 'Este cojín está diseñado ergonómicamente para proteger la cabeza y espalda de tu bebé ante posibles caídas. Fabricado con materiales suaves y transpirables.', image: 'Imagenes/Producto 1 - Cojin anticaidas.png', gallery: ['Imagenes/Producto 1 - Cojin anticaidas.png','Imagenes/Producto 1 - Cojin anticaidas.png','Imagenes/Producto 1 - Cojin anticaidas.png'], colors: ['#FFD700', '#FFC0CB', '#87CEEB'], colorNames: ['Amarillo', 'Rosa', 'Azul'] },
-                    { id: 2, name: 'Peluche Calmante Abrazador', price: 89000, description: 'Las palmaditas suaves y rítmicas ayudan a calmar a tu bebé y a promover el sueño.', fullDescription: 'Este adorable peluche emite vibraciones suaves y un latido rítmico que simula la calma del vientre materno, ayudando a tu bebé a relajarse y dormir profundamente.', image: 'Imagenes/Producto 2 - Cojin abrazador.png', gallery: ['Imagenes/Producto 2 - Cojin abrazador.png','Imagenes/Producto 2 - Cojin abrazador.png','Imagenes/Producto 2 - Cojin abrazador.png'], colors: ['#FFFFFF', '#F5F5DC'], colorNames: ['Blanco', 'Beige'] },
-                    { id: 3, name: 'Cojín Anti-plagiocefalia', price: 120000, description: 'Cojín para prevenir y corregir la cabecita plana o plagiocefalia.', fullDescription: 'Diseñado por pediatras, este cojín distribuye uniformemente la presión sobre el cráneo del bebé, ayudando a prevenir el síndrome de cabeza plana.', image: 'Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg', gallery: ['Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg','Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg','Imagenes/Producto 3 - Cojin anti plagiocefalia.jpg'], colors: ['#ADD8E6', '#90EE90'], colorNames: ['Azul Claro', 'Verde Claro'] },
-                    { id: 4, name: 'Calienta Biberones Smart', price: 95000, description: 'Calienta biberones a la temperatura perfecta, ideal para cuando sales con tu bebé.', fullDescription: 'Este calentador de biberones portátil y recargable por USB es el compañero de viaje perfecto. Mantiene la leche a la temperatura ideal de forma constante.', image: 'Imagenes/Producto 4 - Calienta biberones.png', gallery: ['Imagenes/Producto 4 - Calienta biberones.png','Imagenes/Producto 4 - Calienta biberones.png','Imagenes/Producto 4 - Calienta biberones.png'], colors: ['#FF69B4', '#6495ED'], colorNames: ['Rosa', 'Azul'] },
-                    { id: 5, name: 'Tina Plegable con Termómetro', price: 450000, description: 'Bañera plegable, cómoda para guardar fácilmente en cualquier lugar.', fullDescription: 'Ahorra espacio con esta innovadora tina plegable. Incluye un cojín de apoyo para recién nacidos y un termómetro digital integrado para asegurar siempre la temperatura perfecta del agua.', image: 'Imagenes/Producto 5 - Tina Plegable.jpg', gallery: ['Imagenes/Producto 5 - Tina Plegable.jpg','Imagenes/Producto 5 - Tina Plegable.jpg','Imagenes/Producto 5 - Tina Plegable.jpg'], colors: ['#808080', '#008080'], colorNames: ['Gris', 'Verde Azulado'] },
-                    { id: 6, name: 'Aspirador Nasal Eléctrico', price: 75000, description: 'Ayuda a descongestionar a tu bebé de forma suave y eficaz.', fullDescription: 'Este aspirador nasal eléctrico es silencioso y potente, ideal para limpiar las fosas nasales de tu bebé sin causarle molestias.', image: 'Imagenes/Producto 6 - Aspirador nasal.png', gallery: ['Imagenes/Producto 6 - Aspirador nasal.png','Imagenes/Producto 6 - Aspirador nasal.png','Imagenes/Producto 6 - Aspirador nasal.png'], colors: ['#AFEEEE', '#E0FFFF'], colorNames: ['Turquesa', 'Cian Claro'] }
+                    { 
+                        id: 1, 
+                        name: 'Tapete de Gateo Plegable y Antigolpes', 
+                        price: 159900, 
+                        description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.', 
+                        fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.', 
+                        image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 
+                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg'], 
+                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD'], 
+                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros'] 
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Bañera Plegable + Termómetro', 
+                        price: 239900, 
+                        description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.', 
+                        fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!', 
+                        image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg', 
+                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg','Imagenes/Producto Si 2 - Tina Plegable4.jpg'], 
+                        colors: ['#87CEEB', '#808080', '#FFC0CB'], 
+                        colorNames: ['Azul', 'Gris', 'Rosa'] 
+                    },
+                    { 
+                        id: 3, 
+                        name: 'Pelota (Juguete) Sensorial', 
+                        price: 64900, 
+                        description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.', 
+                        fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.', 
+                        image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 
+                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg','Imagenes/Producto Si 3 - Juguete sensorial5.jpg'], 
+                        colors: ['#FFFFFF'], 
+                        colorNames: ['Multicolor'] 
+                    },
+                    { 
+                        id: 4, 
+                        name: 'Cojín Sujeta Biberón Ergonómico', 
+                        price: 69900, 
+                        description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.', 
+                        fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.', 
+                        image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 
+                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg','Imagenes/Producto Si 4 - Cojin de biberon5.png'], 
+                        colors: ['#66CDAA', '#808080', '#FFC0CB'], 
+                        colorNames: ['Verde Agua Marina', 'Gris', 'Rosa'] 
+                    }
                 ];
             }
 

@@ -401,11 +401,12 @@
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap; 
         }
 
         .modal-thumb {
-            width: 100px;
-            height: 100px;
+            width: 80px; 
+            height: 80px; 
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
@@ -458,6 +459,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 25px;
+            flex-wrap: wrap; 
         }
 
         .color-dot {
@@ -708,6 +710,15 @@
                 max-height: 90vh;
                 overflow-y: auto;
             }
+            .modal-details h2 {
+                font-size: 2rem;
+            }
+            .modal-price {
+                font-size: 1.8rem;
+            }
+            .modal-thumb {
+                width: 70px; 
+            }
         }
         
         @media (max-width: 768px) {
@@ -737,10 +748,63 @@
                 top: 10px;
                 right: 15px;
                 font-size: 30px;
-                color: var(--dark);
+                color: var(--dark); 
+            }
+
+            .product-modal-content {
+                padding: 20px;
+            }
+            
+            .modal-details h2 {
+                font-size: 1.8rem;
+            }
+            .modal-price {
+                font-size: 1.5rem;
+            }
+            .modal-thumb {
+                width: 60px; 
+            }
+            .modal-thumbnails {
+                gap: 10px;
+            }
+            .color-dot {
+                width: 25px;
+                height: 25px;
             }
         }
 
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .product-card {
+                padding: 15px;
+            }
+            .product-name {
+                font-size: 1.1rem;
+            }
+            .product-price {
+                font-size: 1.3rem;
+            }
+            .modal-details h2 {
+                font-size: 1.5rem;
+            }
+            .modal-price {
+                font-size: 1.3rem;
+            }
+            .modal-full-description {
+                font-size: 0.9rem;
+            }
+            .modal-thumb {
+                width: 50px; 
+            }
+            .modal-thumbnails {
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -907,9 +971,9 @@
                         description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.', 
                         fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.', 
                         image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 
-                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg'], 
-                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD'], 
-                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros'] 
+                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo5.png'], 
+                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD', '#D2B48C'], 
+                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros', 'Pista de carros'] 
                     },
                     { 
                         id: 2, 
@@ -918,7 +982,7 @@
                         description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.', 
                         fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!', 
                         image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg', 
-                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg','Imagenes/Producto Si 2 - Tina Plegable4.jpg'], 
+                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg'], 
                         colors: ['#87CEEB', '#808080', '#FFC0CB'], 
                         colorNames: ['Azul', 'Gris', 'Rosa'] 
                     },
@@ -929,7 +993,7 @@
                         description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.', 
                         fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.', 
                         image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 
-                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg','Imagenes/Producto Si 3 - Juguete sensorial5.jpg'], 
+                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial5.jpg'], 
                         colors: ['#FFFFFF'], 
                         colorNames: ['Multicolor'] 
                     },
@@ -940,7 +1004,7 @@
                         description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.', 
                         fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.', 
                         image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 
-                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg','Imagenes/Producto Si 4 - Cojin de biberon5.png'], 
+                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon5.png'], 
                         colors: ['#66CDAA', '#808080', '#FFC0CB'], 
                         colorNames: ['Verde Agua Marina', 'Gris', 'Rosa'] 
                     }
@@ -976,7 +1040,7 @@
             window.openProductModal = (productId) => {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
-                selectedColor = product.colorNames[0]; // Selecciona el primer color por defecto
+                selectedColor = product.colorNames[0]; 
 
                 modalContent.innerHTML = `
                     <div class="modal-gallery">
@@ -1110,6 +1174,13 @@
                 updateOrderSummary();
             }
 
+            document.getElementById('cart-modal').addEventListener('click', (event) => {
+                if (event.target === document.getElementById('cart-modal')) {
+                    toggleCart();
+                }
+            });
+
+
             function updateOrderSummary() {
                 const orderSummaryEl = document.getElementById('order-summary');
                 const finalTotalEl = document.getElementById('final-total');
@@ -1165,9 +1236,6 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
                 event.target.reset();
             });
 
-            /**
-             * Muestra una notificación temporal.
-             */
             function showNotification(message) {
                 const notification = document.getElementById('notification');
                 notification.textContent = message;
@@ -1175,9 +1243,6 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
                 setTimeout(() => notification.classList.remove('show'), 3000);
             }
 
-            /**
-             * Da formato de moneda colombiana a un número.
-             */
             function formatPrice(price) {
                 return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(price);
             }

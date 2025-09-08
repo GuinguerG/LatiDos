@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> LatiDos - Juntos desde el primer latido</title>
     <meta name="description" content=" Productos inteligentes para bebés. Todo lo que necesitas para cuidar a tu bebé con amor y tecnología.">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         /* --- ESTILOS GENERALES Y VARIABLES --- */
         * {
@@ -17,7 +17,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         :root {
             --primary: #a0c7f5;
             --secondary: #c0eee0;
@@ -31,7 +31,7 @@
             --shadow: 0 10px 25px rgba(0,0,0,0.1);
             --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
@@ -43,13 +43,13 @@
         html {
             scroll-behavior: smooth;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -62,23 +62,23 @@
             border: none;
             font-family: inherit;
         }
-        
+
         .btn-primary {
             background: linear-gradient(45deg, var(--accent), var(--accent-alt));
             color: var(--white);
             box-shadow: var(--shadow);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .btn-secondary {
             background: var(--support);
             color: var(--dark);
         }
-        
+
         .btn-secondary:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
@@ -91,7 +91,7 @@
             margin-bottom: 50px;
             color: var(--dark);
         }
-        
+
         /* --- HEADER --- */
         .header {
             position: fixed;
@@ -108,26 +108,26 @@
         .header.scrolled {
             box-shadow: var(--shadow);
         }
-        
+
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             font-size: 28px;
             font-weight: 700;
             color: var(--accent);
             text-decoration: none;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
             gap: 30px;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: var(--dark);
@@ -150,11 +150,11 @@
         .nav-links a:hover::after {
             width: 100%;
         }
-        
+
         .nav-links a:hover {
             color: var(--accent);
         }
-        
+
         .cart-icon {
             position: relative;
             font-size: 22px;
@@ -162,11 +162,11 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        
+
         .cart-icon:hover {
             transform: scale(1.1);
         }
-        
+
         .cart-count {
             position: absolute;
             top: -8px;
@@ -205,7 +205,7 @@
             background: linear-gradient(to top, var(--light-gray), transparent);
             z-index: 2;
         }
-        
+
         .hero-image {
             position: absolute;
             top: 0;
@@ -235,24 +235,24 @@
             margin-bottom: 20px;
             line-height: 1.2;
         }
-        
+
         .hero-text p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
         }
-        
+
         /* --- PRODUCTS SECTION --- */
         .products {
             padding: 80px 0;
         }
-        
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
-        
+
         .product-card {
             background: var(--white);
             border-radius: 20px;
@@ -262,7 +262,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .product-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
@@ -276,7 +276,7 @@
             cursor: pointer;
             overflow: hidden;
         }
-        
+
         .product-image-container img {
             width: 100%;
             height: 100%;
@@ -287,28 +287,28 @@
         .product-image-container:hover img {
             transform: scale(1.05);
         }
-        
+
         .product-name {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 10px;
             color: var(--dark);
         }
-        
+
         .product-price {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 15px;
         }
-        
+
         .product-description {
             color: var(--gray);
             margin-bottom: 20px;
             line-height: 1.5;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
-        
+
         .product-action-btn {
             width: 100%;
             margin-top: auto;
@@ -318,13 +318,13 @@
         .testimonials {
             padding: 80px 0;
         }
-        
+
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+
         .testimonial-card {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 30px;
@@ -334,28 +334,28 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
-        
+
         .testimonial-card:hover {
             transform: scale(1.05);
         }
-        
+
         .testimonial-text {
             font-size: 1.1rem;
             margin-bottom: 20px;
             font-style: italic;
         }
-        
+
         .testimonial-author {
             font-weight: 600;
             color: var(--accent-alt);
         }
-        
+
         .stars {
             color: var(--support);
             font-size: 1.2rem;
             margin-bottom: 15px;
         }
-        
+
         /* --- MODAL DE PRODUCTO (ZOOM) --- */
         .product-modal {
             display: none;
@@ -425,11 +425,11 @@
             display: flex;
             gap: 15px;
             justify-content: center;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
         }
 
         .modal-thumb {
-            width: 80px; 
+            width: 80px;
             height: 80px;
             border-radius: 10px;
             overflow: hidden;
@@ -483,7 +483,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 25px;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
         }
 
         .color-dot {
@@ -500,7 +500,7 @@
             border-color: var(--accent-alt);
             transform: scale(1.15);
         }
-        
+
         .close-modal {
             position: absolute;
             top: 15px;
@@ -532,12 +532,12 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .cart-modal.show {
             display: flex;
             opacity: 1;
         }
-        
+
         .cart-content {
             background: var(--white);
             width: 90%;
@@ -550,11 +550,11 @@
             transform: scale(0.7);
             transition: transform 0.3s ease;
         }
-        
+
         .cart-modal.show .cart-content {
             transform: scale(1);
         }
-        
+
         .cart-header {
             display: flex;
             justify-content: space-between;
@@ -563,7 +563,7 @@
             padding-bottom: 20px;
             border-bottom: 2px solid var(--light-gray);
         }
-        
+
         .close-cart {
             background: none;
             border: none;
@@ -571,7 +571,7 @@
             cursor: pointer;
             color: var(--gray);
         }
-        
+
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -579,7 +579,7 @@
             padding: 15px 0;
             border-bottom: 1px solid var(--light-gray);
         }
-        
+
         .cart-item-info h4 {
             margin-bottom: 5px;
         }
@@ -588,18 +588,18 @@
             font-size: 0.9rem;
             color: var(--gray);
         }
-        
+
         .cart-item-price {
             font-weight: 600;
             color: var(--accent);
         }
-        
+
         .quantity-controls {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         .quantity-btn {
             width: 30px;
             height: 30px;
@@ -611,8 +611,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
         }
-        
+
         .cart-total {
             text-align: center;
             padding: 20px 0;
@@ -620,7 +621,7 @@
             font-weight: 700;
             color: var(--accent);
         }
-        
+
         .checkout-form {
             display: none;
             background: var(--light-gray);
@@ -628,7 +629,7 @@
             border-radius: 15px;
             margin-top: 20px;
         }
-        
+
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
         .form-group input, .form-group select, .form-group textarea {
@@ -647,19 +648,19 @@
             padding: 50px 0 20px;
             margin-top: 50px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 30px;
         }
-        
+
         .footer-section h3 {
             margin-bottom: 20px;
             color: var(--accent);
         }
-        
+
         .footer-section p,
         .footer-section a {
             color: rgba(255,255,255,0.8);
@@ -668,16 +669,16 @@
             display: block;
             transition: color 0.3s;
         }
-        
+
         .footer-section a:hover {
             color: var(--accent);
         }
-        
+
         .social-links {
             display: flex;
             gap: 15px;
         }
-        
+
         .social-links a {
             display: inline-block;
             width: 40px;
@@ -691,11 +692,11 @@
             font-size: 18px;
             transition: transform 0.3s ease;
         }
-        
+
         .social-links a:hover {
             transform: scale(1.1) rotate(10deg);
         }
-        
+
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -718,12 +719,12 @@
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s;
         }
-        
+
         .notification.show {
             opacity: 1;
             transform: translate(-50%, -20px);
         }
-        
+
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
             .hero-text h1 {
@@ -741,15 +742,15 @@
                 font-size: 1.8rem;
             }
             .modal-thumb {
-                width: 70px; 
+                width: 70px;
             }
         }
-        
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-            
+
             .hero-text {
                 padding: 30px;
             }
@@ -757,7 +758,7 @@
             .hero-text h1 {
                 font-size: 2.5rem;
             }
-            
+
             .products-grid, .testimonials-grid, .footer-content, .form-row {
                 grid-template-columns: 1fr;
             }
@@ -766,13 +767,13 @@
                 top: 10px;
                 right: 15px;
                 font-size: 30px;
-                color: var(--dark); 
+                color: var(--dark);
             }
 
             .product-modal-content {
                 padding: 20px;
             }
-            
+
             .modal-details h2 {
                 font-size: 1.8rem;
             }
@@ -780,7 +781,7 @@
                 font-size: 1.5rem;
             }
             .modal-thumb {
-                width: 60px; 
+                width: 60px;
             }
             .modal-thumbnails {
                 gap: 10px;
@@ -821,7 +822,7 @@
                 font-size: 0.9rem;
             }
             .modal-thumb {
-                width: 50px; 
+                width: 50px;
             }
             .modal-thumbnails {
                 gap: 5px;
@@ -939,7 +940,7 @@
             <button class="btn btn-primary" id="checkout-btn" onclick="showCheckout()" style="width: 100%; display: none;">
                 Continuar con la compra
             </button>
-            
+
             <div class="checkout-form" id="checkout-form">
                 <h4 style="margin-bottom: 20px;">Datos de envío</h4>
                 <form id="order-form">
@@ -973,7 +974,7 @@
         let selectedColor = null;
 
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             const WHATSAPP_NUMBER = '573017615578';
             let products = [];
             let cart = [];
@@ -984,49 +985,49 @@
              */
             function getDemoProducts() {
                 return [
-                    { 
-                        id: 1, 
-                        name: 'Tapete de Gateo Plegable y Antigolpes', 
-                        price: 159900, 
-                        description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.', 
-                        fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.', 
-                        image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 
-                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo5.png'], 
-                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD', '#D2B48C'], 
-                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros', 'Pista de carros'] 
+                    {
+                        id: 1,
+                        name: 'Tapete de Gateo Plegable y Antigolpes',
+                        price: 159900,
+                        description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.',
+                        fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.',
+                        image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg',
+                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo5.png'],
+                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD', '#D2B48C'],
+                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros', 'Pista de carros']
                     },
-                    { 
-                        id: 2, 
-                        name: 'Bañera Plegable + Termómetro', 
-                        price: 239900, 
-                        description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.', 
-                        fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!', 
-                        image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg', 
-                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg'], 
-                        colors: ['#87CEEB', '#808080', '#FFC0CB'], 
-                        colorNames: ['Azul', 'Gris', 'Rosa'] 
+                    {
+                        id: 2,
+                        name: 'Bañera Plegable + Termómetro',
+                        price: 239900,
+                        description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.',
+                        fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!',
+                        image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg',
+                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg'],
+                        colors: ['#87CEEB', '#808080', '#FFC0CB'],
+                        colorNames: ['Azul', 'Gris', 'Rosa']
                     },
-                    { 
-                        id: 3, 
-                        name: 'Pelota (Juguete) Sensorial', 
-                        price: 64900, 
-                        description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.', 
-                        fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.', 
-                        image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 
-                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial5.jpg'], 
-                        colors: ['#FFFFFF'], 
-                        colorNames: ['Multicolor'] 
+                    {
+                        id: 3,
+                        name: 'Pelota (Juguete) Sensorial',
+                        price: 64900,
+                        description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.',
+                        fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.',
+                        image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg',
+                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial5.jpg'],
+                        colors: ['#FFFFFF'],
+                        colorNames: ['Multicolor']
                     },
-                    { 
-                        id: 4, 
-                        name: 'Cojín Sujeta Biberón Ergonómico', 
-                        price: 69900, 
-                        description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.', 
-                        fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.', 
-                        image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 
-                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon5.png'], 
-                        colors: ['#66CDAA', '#808080', '#FFC0CB'], 
-                        colorNames: ['Verde Agua Marina', 'Gris', 'Rosa'] 
+                    {
+                        id: 4,
+                        name: 'Cojín Sujeta Biberón Ergonómico',
+                        price: 69900,
+                        description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.',
+                        fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.',
+                        image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg',
+                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon5.png'],
+                        colors: ['#66CDAA', '#808080', '#FFC0CB'],
+                        colorNames: ['Verde Agua Marina', 'Gris', 'Rosa']
                     }
                 ];
             }
@@ -1051,7 +1052,7 @@
                     </div>
                 `).join('');
             }
-            
+
             // --- LÓGICA DEL MODAL DE PRODUCTO ---
             const modal = document.getElementById('productModal');
             const modalContent = modal.querySelector('.product-modal-content');
@@ -1060,7 +1061,7 @@
             window.openProductModal = (productId) => {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
-                selectedColor = product.colorNames[0]; 
+                selectedColor = product.colorNames[0];
 
                 modalContent.innerHTML = `
                     <div class="modal-gallery">
@@ -1115,13 +1116,13 @@
                 const cartItemId = `${productId}-${chosenColor}`;
 
                 const existingItem = cart.find(item => item.cartId === cartItemId);
-                
+
                 if (existingItem) {
                     existingItem.quantity++;
                 } else {
                     cart.push({ ...product, quantity: 1, color: chosenColor, cartId: cartItemId });
                 }
-                
+
                 showNotification(`'${product.name}' (${chosenColor}) fue agregado al carrito.`);
                 updateCart();
                 if(modal.classList.contains('show')) modal.classList.remove('show');
@@ -1156,7 +1157,7 @@
                 const cartItemsEl = document.getElementById('cart-items');
                 const cartTotalEl = document.getElementById('cart-total');
                 const checkoutBtn = document.getElementById('checkout-btn');
-                
+
                 if (cart.length === 0) {
                     cartItemsEl.innerHTML = `<p style="text-align: center; color: var(--gray); padding: 50px 0;">Tu carrito está vacío</p>`;
                     cartTotalEl.style.display = 'none';
@@ -1164,31 +1165,31 @@
                     document.getElementById('checkout-form').style.display = 'none';
                     return;
                 }
-                
+
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                
+
                 cartItemsEl.innerHTML = cart.map(item => `
-                    <div class="cart-item">
+                    <div class="cart-item" data-cart-id="${item.cartId}">
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
                             <div class="item-color">Color: ${item.color}</div>
                             <div class="cart-item-price">${formatPrice(item.price)} x ${item.quantity}</div>
                         </div>
                         <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', -1)">-</button>
+                            <button class="quantity-btn" data-change="-1">-</button>
                             <span>${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', 1)">+</button>
+                            <button class="quantity-btn" data-change="1">+</button>
                         </div>
                     </div>
                 `).join('');
-                
+
                 cartTotalEl.innerHTML = `Total: ${formatPrice(total)}`;
                 cartTotalEl.style.display = 'block';
                 checkoutBtn.style.display = 'block';
             }
 
             window.toggleCart = () => document.getElementById('cart-modal').classList.toggle('show');
-            
+
             window.showCheckout = () => {
                 document.getElementById('checkout-form').style.display = 'block';
                 updateOrderSummary();
@@ -1204,10 +1205,10 @@
             function updateOrderSummary() {
                 const orderSummaryEl = document.getElementById('order-summary');
                 const finalTotalEl = document.getElementById('final-total');
-                
+
                 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const total = subtotal + shippingCost;
-                
+
                 orderSummaryEl.innerHTML = cart.map(item => `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                         <span>${item.name} (${item.color}) x${item.quantity}</span>
@@ -1217,7 +1218,7 @@
                         <span>Envío:</span>
                         <span>${formatPrice(shippingCost)}</span>
                     </div>`;
-                
+
                 finalTotalEl.textContent = formatPrice(total);
             }
 
@@ -1225,10 +1226,10 @@
                 event.preventDefault();
                 const formData = new FormData(event.target);
                 const orderData = Object.fromEntries(formData.entries());
-                
+
                 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const total = subtotal + shippingCost;
-                
+
                 const message = `🛍️ *NUEVO PEDIDO - LATIDOS*
 
 👤 *Datos del cliente:*
@@ -1245,10 +1246,10 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
 • *Total a pagar: ${formatPrice(total)}* (Pago contraentrega)
 
 📝 *Comentarios:* ${orderData.comments || 'Ninguno'}`;
-                
+
                 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message.trim())}`;
                 window.open(whatsappUrl, '_blank');
-                
+
                 cart = [];
                 updateCart();
                 toggleCart();
@@ -1279,6 +1280,21 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
                     document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
                 });
             }
+
+            // Delegación de eventos para los botones del carrito
+            document.getElementById('cart-items').addEventListener('click', function(event) {
+                const target = event.target.closest('.quantity-btn');
+                if (target) {
+                    const cartItem = target.closest('.cart-item');
+                    if (cartItem) {
+                        const cartId = cartItem.dataset.cartId;
+                        const change = parseInt(target.dataset.change, 10);
+                        if (cartId && !isNaN(change)) {
+                            updateQuantity(cartId, change);
+                        }
+                    }
+                }
+            });
 
             init();
         });

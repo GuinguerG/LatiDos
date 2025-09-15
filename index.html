@@ -54,13 +54,24 @@
             display: inline-block;
             padding: 12px 30px;
             border-radius: 50px;
-            text-decoration: none;
+            text-decoration: none; 
             font-weight: 600;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            user-select: none; 
             font-family: inherit;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ */
+            -moz-user-select: none; /* Firefox */
+            touch-action: manipulation; 
+            user-select: none; /* Estándar */
+        }
+        
+        /* --- NUEVA REGLA PARA IGNORAR CLICS EN EL TEXTO DEL BOTÓN --- */
+        .btn span {
+            pointer-events: none;
         }
 
         .btn-primary {
@@ -611,7 +622,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            touch-action: manipulation;
+            touch-action: manipulation; /* Mejora la respuesta en móviles */
         }
 
         .cart-total {
@@ -841,7 +852,7 @@
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
-            <div class="cart-icon" onclick="toggleCart()">
+            <div class="cart-icon" id="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count">0</span>
             </div>
@@ -856,9 +867,9 @@
             <div class="hero-text">
                 <h1>Juntos desde el primer latido</h1>
                 <p>Descubre productos inteligentes diseñados especialmente para cuidar a tu bebé con amor y tecnología de vanguardia.</p>
-                <a href="#productos" class="btn btn-primary">Ver Productos</a>
+                <a href="#productos" class="btn btn-primary"><span>Ver Productos</span></a>
                 <a id="contact-btn" href="#" class="btn btn-secondary" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contáctanos
+                    <i class="fab fa-whatsapp"></i> <span>Contáctanos</span>
                 </a>
             </div>
         </div>
@@ -933,12 +944,12 @@
         <div class="cart-content">
             <div class="cart-header">
                 <h3>Mi Carrito</h3>
-                <button class="close-cart" onclick="toggleCart()">×</button>
+                <button class="close-cart" id="close-cart-btn">×</button>
             </div>
             <div id="cart-items"></div>
             <div class="cart-total" id="cart-total" style="display: none;"></div>
-            <button class="btn btn-primary" id="checkout-btn" onclick="showCheckout()" style="width: 100%; display: none;">
-                Continuar con la compra
+            <button class="btn btn-primary" id="checkout-btn" style="width: 100%; display: none;">
+                <span>Continuar con la compra</span>
             </button>
 
             <div class="checkout-form" id="checkout-form">
@@ -960,7 +971,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fab fa-whatsapp"></i> Confirmar Pedido por WhatsApp
+                        <i class="fab fa-whatsapp"></i> <span>Confirmar Pedido por WhatsApp</span>
                     </button>
                 </form>
             </div>
@@ -970,71 +981,27 @@
     <div class="notification" id="notification"></div>
 
     <script>
-        // Variable global para almacenar el color seleccionado en el modal
-        let selectedColor = null;
-
         document.addEventListener('DOMContentLoaded', function() {
 
+            let selectedColor = null;
             const WHATSAPP_NUMBER = '573017615578';
             let products = [];
             let cart = [];
-            let shippingCost = 12000; // Costo de envío
+            let shippingCost = 12000;
 
-            /**
-             * Contiene los datos de los productos.
-             */
+            const modal = document.getElementById('productModal');
+            const modalContent = modal.querySelector('.product-modal-content');
+            const cartModal = document.getElementById('cart-modal');
+
             function getDemoProducts() {
                 return [
-                    {
-                        id: 1,
-                        name: 'Tapete de Gateo Plegable y Antigolpes',
-                        price: 159900,
-                        description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.',
-                        fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.',
-                        image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg',
-                        gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo5.png'],
-                        colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD', '#D2B48C'],
-                        colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros', 'Pista de carros']
-                    },
-                    {
-                        id: 2,
-                        name: 'Bañera Plegable + Termómetro',
-                        price: 239900,
-                        description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.',
-                        fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!',
-                        image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg',
-                        gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg'],
-                        colors: ['#87CEEB', '#808080', '#FFC0CB'],
-                        colorNames: ['Azul', 'Gris', 'Rosa']
-                    },
-                    {
-                        id: 3,
-                        name: 'Pelota (Juguete) Sensorial',
-                        price: 64900,
-                        description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.',
-                        fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.',
-                        image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg',
-                        gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial5.jpg'],
-                        colors: ['#FFFFFF'],
-                        colorNames: ['Multicolor']
-                    },
-                    {
-                        id: 4,
-                        name: 'Cojín Sujeta Biberón Ergonómico',
-                        price: 69900,
-                        description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.',
-                        fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.',
-                        image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg',
-                        gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon5.png'],
-                        colors: ['#66CDAA', '#808080', '#FFC0CB'],
-                        colorNames: ['Verde Agua Marina', 'Gris', 'Rosa']
-                    }
+                    { id: 1, name: 'Tapete de Gateo Plegable y Antigolpes', price: 159900, description: 'Sabemos que los primeros pasos y gateo de tu bebé son momentos llenos de alegría y descubrimientos... y también de algunas caídas.', fullDescription: 'Hecho con espuma XPE de alta densidad, con medidas de 1,80 X 2,00 X 1 cm, este tapete no solo amortigua los golpes y caídas, sino que también aísla del frío del piso, creando un espacio de juego cálido y confortable. Su superficie impermeable es fácil de limpiar, ideal para derrames y accidentes. ¿Y la mejor parte? Se pliega en segundos para que puedas guardarlo sin ocupar espacio o llevarlo a donde vayas.', image: 'Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', gallery: ['Imagenes/Producto Si 1 - Tapete de Gateo1.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo2.png', 'Imagenes/Producto Si 1 - Tapete de Gateo3.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo4.jpg', 'Imagenes/Producto Si 1 - Tapete de Gateo5.png'], colors: ['#F5F5DC', '#F5DEB3', '#FFF8DC', '#FFEBCD', '#D2B48C'], colorNames: ['Monos y pandas beige', 'Jirafas y Arboles', 'Jirafa y Animales pequeños', 'Animales y cuadros', 'Pista de carros'] },
+                    { id: 2, name: 'Bañera Plegable + Termómetro', price: 239900, description: '¿La hora del baño es un desafío de espacio y logística? Con nuestra Bañera Plegable, transformarás este momento en una experiencia cómoda y segura, sin sacrificar espacio en tu hogar.', fullDescription: 'Diseñada para la vida moderna, esta bañera se despliega fácilmente para crear un espacio de baño amplio y seguro para tu bebé. Su material de alta calidad mantiene la temperatura del agua por más tiempo y su diseño antideslizante ofrece estabilidad total, adicionalmente tiene termómetro incluido para medir fácilmente la temperatura del agua, manteniendo a tu bebé seguro. Cuando terminas, solo la pliegas y la guardas en cualquier rincón. ¡Adiós a las bañeras estorbosas!', image: 'Imagenes/Producto Si 2 - Tina Plegable1.jpg', gallery: ['Imagenes/Producto Si 2 - Tina Plegable1.jpg', 'Imagenes/Producto Si 2 - Tina Plegable2.jpg', 'Imagenes/Producto Si 2 - Tina Plegable3.jpg', 'Imagenes/Producto Si 2 - Tina Plegable4.jpg'], colors: ['#87CEEB', '#808080', '#FFC0CB'], colorNames: ['Azul', 'Gris', 'Rosa'] },
+                    { id: 3, name: 'Pelota (Juguete) Sensorial', price: 64900, description: 'Desde sus primeros días, tu bebé aprende a través del tacto y la exploración. Nuestra Pelota Sensorial no es solo un juguete; es una herramienta esencial para el desarrollo de la motricidad fina y la estimulación sensorial.', fullDescription: 'Con sus múltiples texturas, colores vibrantes y un tamaño perfecto para las manos pequeñas, esta pelota invita a tu bebé a agarrarla, apretarla y examinarla. El suave sonido de su cascabel interior cautiva su atención, ayudando a desarrollar la coordinación ojo-mano. Hecha de silicona suave y segura para morder, es el compañero ideal para cada etapa de su crecimiento. Dale a tu pequeño el regalo de la curiosidad y el descubrimiento. Nota importante: Hervir antes del primer uso.', image: 'Imagenes/Producto Si 3 - Juguete sensorial1.jpg', gallery: ['Imagenes/Producto Si 3 - Juguete sensorial1.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial2.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial3.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial4.jpg', 'Imagenes/Producto Si 3 - Juguete sensorial5.jpg'], colors: ['#FFFFFF'], colorNames: ['Multicolor'] },
+                    { id: 4, name: 'Cojín Sujeta Biberón Ergonómico', price: 69900, description: 'La alimentación es un momento íntimo y especial entre tú y tu bebé. Nuestro Cojín Sujeta Biberón está diseñado para hacer esta experiencia aún más cómoda, permitiendo que te concentres plenamente en tu pequeño.', fullDescription: 'Este cojín ergonómico te ayuda a sostener el biberón en el ángulo perfecto, liberando tus manos y reduciendo la tensión en tus brazos, cuello y espalda. Ya sea que estés alimentando a tu bebé en casa o de viaje, este cojín proporciona el soporte necesario para una posición ideal y cómoda. Advertencia: Este cojín es un soporte diseñado para tu comodidad y no reemplaza la supervisión constante de un adulto durante la alimentación.', image: 'Imagenes/Producto Si 4 - Cojin de biberon1.jpg', gallery: ['Imagenes/Producto Si 4 - Cojin de biberon1.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon2.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon3.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon4.jpg', 'Imagenes/Producto Si 4 - Cojin de biberon5.png'], colors: ['#66CDAA', '#808080', '#FFC0CB'], colorNames: ['Verde Agua Marina', 'Gris', 'Rosa'] }
                 ];
             }
 
-            /**
-             * Muestra los productos en la página principal.
-             */
             function displayProducts() {
                 const container = document.getElementById('products-container');
                 products = getDemoProducts();
@@ -1047,16 +1014,11 @@
                         <p class="product-price">${formatPrice(product.price)}</p>
                         <p class="product-description">${product.description}</p>
                         <button class="btn btn-primary product-action-btn" onclick="openProductModal(${product.id})">
-                            Ver Detalles
+                            <span>Ver Detalles</span>
                         </button>
                     </div>
                 `).join('');
             }
-
-            // --- LÓGICA DEL MODAL DE PRODUCTO ---
-            const modal = document.getElementById('productModal');
-            const modalContent = modal.querySelector('.product-modal-content');
-            const closeModalBtn = modal.querySelector('.close-modal');
 
             window.openProductModal = (productId) => {
                 const product = products.find(p => p.id === productId);
@@ -1080,7 +1042,7 @@
                                 ${product.colors.map((color, index) => `<div class="color-dot ${index === 0 ? 'selected' : ''}" style="background-color:${color};" title="${product.colorNames[index]}" onclick="selectColor(this, '${product.colorNames[index]}')"></div>`).join('')}
                             </div>
                         </div>
-                        <button class="btn btn-primary" onclick="addToCartFromModal(${product.id})">Agregar al Carrito</button>
+                        <button class="btn btn-primary" onclick="addToCart(${product.id})"><span>Agregar al Carrito</span></button>
                     </div>
                 `;
                 modal.classList.add('show');
@@ -1098,23 +1060,12 @@
                 thumbElement.classList.add('active');
             }
 
-            closeModalBtn.addEventListener('click', () => modal.classList.remove('show'));
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal) modal.classList.remove('show');
-            });
-
-            // --- LÓGICA DEL CARRITO ---
-            window.addToCartFromModal = (productId) => {
-                addToCart(productId, selectedColor);
-            }
-
-            window.addToCart = (productId, color = null) => {
+            window.addToCart = (productId) => {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
 
-                const chosenColor = color || product.colorNames[0];
+                const chosenColor = selectedColor || product.colorNames[0];
                 const cartItemId = `${productId}-${chosenColor}`;
-
                 const existingItem = cart.find(item => item.cartId === cartItemId);
 
                 if (existingItem) {
@@ -1125,16 +1076,18 @@
 
                 showNotification(`'${product.name}' (${chosenColor}) fue agregado al carrito.`);
                 updateCart();
-                if(modal.classList.contains('show')) modal.classList.remove('show');
+                if (modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                }
             }
-
+            
             window.updateQuantity = (cartId, change) => {
                 const item = cart.find(item => item.cartId === cartId);
                 if (!item) return;
 
                 const newQuantity = item.quantity + change;
                 if (newQuantity <= 0) {
-                    cart = cart.filter(item => item.cartId !== cartId);
+                    cart = cart.filter(i => i.cartId !== cartId);
                 } else {
                     item.quantity = newQuantity;
                 }
@@ -1169,16 +1122,16 @@
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
                 cartItemsEl.innerHTML = cart.map(item => `
-                    <div class="cart-item" data-cart-id="${item.cartId}">
+                    <div class="cart-item">
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
                             <div class="item-color">Color: ${item.color}</div>
                             <div class="cart-item-price">${formatPrice(item.price)} x ${item.quantity}</div>
                         </div>
                         <div class="quantity-controls">
-                            <button class="quantity-btn" data-change="-1">-</button>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', -1)"><span>-</span></button>
                             <span>${item.quantity}</span>
-                            <button class="quantity-btn" data-change="1">+</button>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', 1)"><span>+</span></button>
                         </div>
                     </div>
                 `).join('');
@@ -1188,27 +1141,22 @@
                 checkoutBtn.style.display = 'block';
             }
 
-            window.toggleCart = () => document.getElementById('cart-modal').classList.toggle('show');
-
-            window.showCheckout = () => {
-                document.getElementById('checkout-form').style.display = 'block';
-                updateOrderSummary();
+            function toggleCart() {
+                cartModal.classList.toggle('show');
             }
 
-            document.getElementById('cart-modal').addEventListener('click', (event) => {
-                if (event.target === document.getElementById('cart-modal')) {
-                    toggleCart();
-                }
-            });
-
+            function showCheckout() {
+                document.getElementById('checkout-form').style.display = 'block';
+                updateOrderSummary();
+            };
 
             function updateOrderSummary() {
                 const orderSummaryEl = document.getElementById('order-summary');
                 const finalTotalEl = document.getElementById('final-total');
-
+                
                 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const total = subtotal + shippingCost;
-
+                
                 orderSummaryEl.innerHTML = cart.map(item => `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                         <span>${item.name} (${item.color}) x${item.quantity}</span>
@@ -1218,18 +1166,27 @@
                         <span>Envío:</span>
                         <span>${formatPrice(shippingCost)}</span>
                     </div>`;
-
+                
                 finalTotalEl.textContent = formatPrice(total);
+            }
+
+            document.getElementById('cart-icon').addEventListener('click', toggleCart);
+            document.getElementById('close-cart-btn').addEventListener('click', toggleCart);
+            document.getElementById('checkout-btn').addEventListener('click', showCheckout);
+            modal.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('show'));
+            
+            function formatPrice(price) {
+                return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(price);
             }
 
             document.getElementById('order-form').addEventListener('submit', function(event) {
                 event.preventDefault();
                 const formData = new FormData(event.target);
                 const orderData = Object.fromEntries(formData.entries());
-
+                
                 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 const total = subtotal + shippingCost;
-
+                
                 const message = `🛍️ *NUEVO PEDIDO - LATIDOS*
 
 👤 *Datos del cliente:*
@@ -1246,10 +1203,10 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
 • *Total a pagar: ${formatPrice(total)}* (Pago contraentrega)
 
 📝 *Comentarios:* ${orderData.comments || 'Ninguno'}`;
-
+                
                 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message.trim())}`;
                 window.open(whatsappUrl, '_blank');
-
+                
                 cart = [];
                 updateCart();
                 toggleCart();
@@ -1257,18 +1214,13 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
                 event.target.reset();
             });
 
-            function showNotification(message) {
+             function showNotification(message) {
                 const notification = document.getElementById('notification');
                 notification.textContent = message;
                 notification.classList.add('show');
                 setTimeout(() => notification.classList.remove('show'), 3000);
             }
-
-            function formatPrice(price) {
-                return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(price);
-            }
-
-            // --- INICIALIZACIÓN ---
+            
             function init() {
                 const contactBtn = document.getElementById('contact-btn');
                 const message = encodeURIComponent("¡Hola LatiDos! 💕 me gustaría recibir información de un producto.");
@@ -1280,21 +1232,6 @@ ${cart.map(item => `• ${item.name} (Color: ${item.color}) - Cantidad: ${item.q
                     document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
                 });
             }
-
-            // Delegación de eventos para los botones del carrito
-            document.getElementById('cart-items').addEventListener('click', function(event) {
-                const target = event.target.closest('.quantity-btn');
-                if (target) {
-                    const cartItem = target.closest('.cart-item');
-                    if (cartItem) {
-                        const cartId = cartItem.dataset.cartId;
-                        const change = parseInt(target.dataset.change, 10);
-                        if (cartId && !isNaN(change)) {
-                            updateQuantity(cartId, change);
-                        }
-                    }
-                }
-            });
 
             init();
         });
